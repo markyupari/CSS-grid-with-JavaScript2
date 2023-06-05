@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid</title>
+    <style>
+        .on{
+            background: orange;
+        }
+        .content{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            gap: 5px;
+        }
+        div{
+            padding: 50px;
+            text-align: center;
+            border-style: solid;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="move()">MOVE</button>
+    <main class="content">
+        <div id="s1">1</div>
+        <div id="s2">2</div>
+        <div id="s3">3</div>
+        <div id="s4">4</div>
+        <div id="s5">5</div>
+        <div id="s6">6</div>
+        <div id="s7">7</div>
+        <div id="s8">8</div>
+        <div id="s9">9</div>
+        <div id="s10">10</div>
+        <div id="s11">11</div>
+        <div id="s12">12</div>  
+    </main>
+    <script>
+        let index = 1;
+        let toggle = 0;
+        let timer = null;
+        function on() {
+            if (index > 12) {
+                clearTimeout(timer);
+                return;
+            }
+            //element id varies with the value of 'index'
+            const element = document.getElementById(`s${index}`);
+            //applies class to element id s(index)
+            if (toggle === 0) {
+                element.classList.toggle('on');
+                toggle = 1;
+            } else {
+                element.classList.toggle('on');
+                toggle = 0;
+                index++;
+            }
+        }
+        function move() {
+            //call function on() and itself every 1000ms
+            timer = setTimeout(() => {
+                on();
+                move();
+            }, 500);
+        }
+        
+    </script>
+</body>
+</html>
